@@ -17,6 +17,7 @@ public:
 
 private slots:
     void alustaMang();
+    void avaEdetabel(); // ⬅️ Lisa see
 
 private:
     Ui::StartWindow *ui;

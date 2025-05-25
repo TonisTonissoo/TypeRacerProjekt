@@ -1,6 +1,7 @@
 #include "startwindow.h"
 #include "ui_startwindow.h"
 #include "mainwindow.h"
+#include "leaderboard.h"
 #include <QMessageBox>
 
 StartWindow::StartWindow(QWidget *parent)
@@ -9,6 +10,7 @@ StartWindow::StartWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->pushButtonStart, &QPushButton::clicked, this, &StartWindow::alustaMang);
+    connect(ui->pushButtonEdetabel, &QPushButton::clicked, this, &StartWindow::avaEdetabel);
 }
 
 StartWindow::~StartWindow()
@@ -24,7 +26,12 @@ void StartWindow::alustaMang()
         return;
     }
 
-    MainWindow *mang = new MainWindow(nimi);  // <-- edastame nime konstruktorisse
+    MainWindow *mang = new MainWindow(nimi);
     mang->show();
     this->close();
+}
+
+void StartWindow::avaEdetabel() {
+    Leaderboard *edetabel = new Leaderboard(this);
+    edetabel->exec();  // Kasutame exec() kuna Leaderboard on QDialog
 }

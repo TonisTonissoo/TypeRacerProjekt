@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <QMessageBox>
+#include <fstream>
+#include <QDate>
 
 MainWindow::MainWindow(const QString& kasutajaNimi, QWidget *parent)
     : QMainWindow(parent)
@@ -40,7 +42,7 @@ void MainWindow::uusLause() {
     ui->labelLaused->setText(QString::fromStdString(lause));
     ui->lineEditSisestus->clear();
     ui->labelTulemus->clear();
-    ui->lineEditSisestus->setEnabled(true);  // Luba uuesti sisestamine
+    ui->lineEditSisestus->setEnabled(true);
     start = std::chrono::high_resolution_clock::now();
 }
 
@@ -62,7 +64,15 @@ void MainWindow::kontrolliSisestus() {
                           .arg(QString::fromStdString(analüüs));
 
     ui->labelTulemus->setText(tulemus);
-    ui->lineEditSisestus->setEnabled(false);  // Keela sisestus pärast vastust
+    ui->lineEditSisestus->setEnabled(false);
+
+    // Salvesta tulemus faili
+    std::ofstream fail("tulemused.txt", std::ios::app);
+    if (fail.is_open()) {
+        QString kuupäev = QDate::currentDate().toString("dd.MM.yyyy");
+        fail << kasutaja.toStdString() << ";" << wpm << ";" << kestus.count() << ";" << kuupäev.toStdString() << "\n";
+        fail.close();
+    }
 }
 
 void MainWindow::lopetaMang() {
