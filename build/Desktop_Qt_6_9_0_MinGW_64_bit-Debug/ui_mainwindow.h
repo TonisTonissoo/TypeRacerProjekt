@@ -40,18 +40,25 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(562, 600);
+        MainWindow->resize(562, 724);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayoutWidget = new QWidget(centralwidget);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(29, 20, 471, 471));
+        verticalLayoutWidget->setGeometry(QRect(9, 20, 541, 661));
         verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout_3->setSpacing(10);
         verticalLayout_3->setObjectName("verticalLayout_3");
         verticalLayout_3->setContentsMargins(15, 15, 15, 15);
         labelLaused = new QLabel(verticalLayoutWidget);
         labelLaused->setObjectName("labelLaused");
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(1);
+        sizePolicy.setHeightForWidth(labelLaused->sizePolicy().hasHeightForWidth());
+        labelLaused->setSizePolicy(sizePolicy);
+        labelLaused->setMinimumSize(QSize(0, 60));
+        labelLaused->setWordWrap(true);
 
         verticalLayout_3->addWidget(labelLaused);
 
@@ -62,23 +69,26 @@ public:
 
         pushButtonUusLause = new QPushButton(verticalLayoutWidget);
         pushButtonUusLause->setObjectName("pushButtonUusLause");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(pushButtonUusLause->sizePolicy().hasHeightForWidth());
-        pushButtonUusLause->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButtonUusLause->sizePolicy().hasHeightForWidth());
+        pushButtonUusLause->setSizePolicy(sizePolicy1);
 
         verticalLayout_3->addWidget(pushButtonUusLause);
 
         pushButtonLopeta = new QPushButton(verticalLayoutWidget);
         pushButtonLopeta->setObjectName("pushButtonLopeta");
-        sizePolicy.setHeightForWidth(pushButtonLopeta->sizePolicy().hasHeightForWidth());
-        pushButtonLopeta->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(pushButtonLopeta->sizePolicy().hasHeightForWidth());
+        pushButtonLopeta->setSizePolicy(sizePolicy1);
 
         verticalLayout_3->addWidget(pushButtonLopeta);
 
         labelTulemus = new QLabel(verticalLayoutWidget);
         labelTulemus->setObjectName("labelTulemus");
+        sizePolicy.setHeightForWidth(labelTulemus->sizePolicy().hasHeightForWidth());
+        labelTulemus->setSizePolicy(sizePolicy);
+        labelTulemus->setMinimumSize(QSize(0, 200));
         labelTulemus->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
         labelTulemus->setWordWrap(true);
 
@@ -87,7 +97,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 562, 21));
+        menubar->setGeometry(QRect(0, 0, 562, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");

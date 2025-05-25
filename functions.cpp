@@ -37,48 +37,80 @@ double arvutaWPM(const std::string& sisestus, double kestusSekundites) {
     return sõnadeArv / minutites;
 }
 
-void salvestaTulemus(const std::string& nimi, double wpm) {
-    std::ofstream fail("scoreboard.txt", std::ios::app);
-    if (fail.is_open()) {
-        fail << nimi << " - " << static_cast<int>(wpm) << " WPM" << std::endl;
-    }
+// Abifunktsioon tühikute eemaldamiseks
+std::string trim(const std::string& s) {
+    size_t start = s.find_first_not_of(" \t\n\r");
+    size_t end = s.find_last_not_of(" \t\n\r");
+    return (start == std::string::npos || end == std::string::npos) ? "" : s.substr(start, end - start + 1);
 }
 
-struct Tulemus {
-    std::string nimi;
-    int wpm;
-};
-
-void kuvaScoreboard() {
-    std::ifstream fail("scoreboard.txt");
+void salvestaTulemus(const std::string& nimiOrig, double wpm, double aegSekundites) {
+    std::ifstream sisend("scoreboard.txt");
+    std::vector<std::tuple<std::string, double, double, std::string>> tulemused;
     std::string rida;
-    std::vector<Tulemus> tulemused;
 
-    if (fail.is_open()) {
-        while (std::getline(fail, rida)) {
-            std::istringstream iss(rida);
-            Tulemus t;
-            std::getline(iss, t.nimi, '-');
-            std::string wpmStr;
-            std::getline(iss, wpmStr);
+    std::string nimi = trim(nimiOrig);
 
-            wpmStr.erase(0, wpmStr.find_first_not_of(" "));
-            t.wpm = std::stoi(wpmStr);
+    // Loeme olemasolevad tulemused, kuid jätame samanimelise mängija välja
+    while (std::getline(sisend, rida)) {
+        std::istringstream iss(rida);
+        std::string nimiFailist, wpmStr, aegStr, kuupäev;
 
-            tulemused.push_back(t);
-        }
+        std::getline(iss, nimiFailist, ';');
+        std::getline(iss, wpmStr, ';');
+        std::getline(iss, aegStr, ';');
+        std::getline(iss, kuupäev);
 
-        std::sort(tulemused.begin(), tulemused.end(), [](const Tulemus& a, const Tulemus& b) {
-            return a.wpm > b.wpm;
-        });
+        nimiFailist = trim(nimiFailist);
 
-        std::cout << "\n=== Edetabel ===" << std::endl;
+        // Jätame vana tulemuse eemaldamiseks välja kõik selle mängija kirjed
+        if (nimiFailist == nimi) continue;
+
+        double vanaWPM = std::stod(wpmStr);
+        double vanaAeg = std::stod(aegStr);
+        tulemused.emplace_back(nimiFailist, vanaWPM, vanaAeg, kuupäev);
+    }
+    sisend.close();
+
+    // Uue tulemuse lisamise tingimus (kas väärib top 5 kohta)
+    bool lisaUus = false;
+    if (tulemused.size() < 5 || wpm > std::get<1>(*std::min_element(
+                                    tulemused.begin(), tulemused.end(),
+                                    [](const auto& a, const auto& b) {
+                                        return std::get<1>(a) < std::get<1>(b);
+                                    }))) {
+        lisaUus = true;
+    }
+
+    if (lisaUus) {
+        // Loome kuupäeva
+        time_t nüüd = time(nullptr);
+        tm* local = localtime(&nüüd);
+        char kuupäevStr[11];
+        strftime(kuupäevStr, sizeof(kuupäevStr), "%d.%m.%Y", local);
+
+        // Lisa uus tulemus
+        tulemused.emplace_back(nimi, wpm, aegSekundites, std::string(kuupäevStr));
+
+        // Sorteeri tulemused WPM alusel
+        std::sort(tulemused.begin(), tulemused.end(),
+                  [](const auto& a, const auto& b) {
+                      return std::get<1>(a) > std::get<1>(b);
+                  });
+
+        // Salvesta top 5
+        std::ofstream väljund("scoreboard.txt", std::ios::trunc);
+        int count = 0;
         for (const auto& t : tulemused) {
-            std::cout << t.nimi << " - " << t.wpm << " WPM" << std::endl;
+            if (count++ >= 5) break;
+            väljund << std::get<0>(t) << ";" << std::fixed << std::setprecision(4)
+                    << std::get<1>(t) << ";" << std::get<2>(t) << ";" << std::get<3>(t) << "\n";
         }
-        std::cout << "================\n" << std::endl;
     }
 }
+
+
+
 
 std::string analyysiTekst(const std::string& originaal, const std::string& sisestus) {
     std::ostringstream väljund;

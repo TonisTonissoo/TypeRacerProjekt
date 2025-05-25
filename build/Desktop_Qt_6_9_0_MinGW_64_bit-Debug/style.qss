@@ -1,0 +1,63 @@
+/* Aknale üldine taust */
+QMainWindow, QDialog, QWidget {
+    background-color: #e6f2ff; /* helesinine */
+}
+
+/* Nupud */
+QPushButton {
+    background-color: #3c8dbc;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 6px;
+    border: none;
+}
+
+QPushButton:hover {
+    background-color: #367fa9;
+}
+
+/* Sildid */
+QLabel {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+/* Tekstisisestus */
+QLineEdit {
+    border: 2px solid #3c8dbc;
+    border-radius: 4px;
+    padding: 4px;
+    background-color: white;
+}
+
+/* Tabel (leaderboard) */
+QTableWidget {
+    background-color: white;
+    border: 1px solid #3c8dbc;
+    gridline-color: #3c8dbc;
+}
+
+QHeaderView::section {
+    background-color: #3c8dbc;
+    color: white;
+    padding: 4px;
+}
+
+/* Lause kuvamine */
+QLabel#labelLaused {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1a1a1a;
+    padding: 10px;
+    qproperty-alignment: 'AlignCenter'; /* keskjoondus */
+}
+
+/* Tulemuste kuvamine */
+QLabel#labelTulemus {
+    font-size: 16px;
+    color: #003366;
+    padding: 8px;
+    min-height: 200px; /* lisaks visuaalseks ühtsuseks */
+}
+

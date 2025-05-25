@@ -10,10 +10,12 @@
 #define UI_STARTWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
@@ -33,6 +35,7 @@ public:
     QPushButton *pushButtonStart;
     QPushButton *pushButtonEdetabel;
     QMenuBar *menubar;
+    QMenu *menuTypeRacer_Start;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *StartWindow)
@@ -51,6 +54,11 @@ public:
         verticalLayout_3->setContentsMargins(15, 15, 15, 15);
         labelTere = new QLabel(verticalLayoutWidget);
         labelTere->setObjectName("labelTere");
+        QFont font;
+        font.setPointSize(16);
+        font.setBold(true);
+        labelTere->setFont(font);
+        labelTere->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_3->addWidget(labelTere);
 
@@ -73,10 +81,14 @@ public:
         menubar = new QMenuBar(StartWindow);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 562, 22));
+        menuTypeRacer_Start = new QMenu(menubar);
+        menuTypeRacer_Start->setObjectName("menuTypeRacer_Start");
         StartWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(StartWindow);
         statusbar->setObjectName("statusbar");
         StartWindow->setStatusBar(statusbar);
+
+        menubar->addAction(menuTypeRacer_Start->menuAction());
 
         retranslateUi(StartWindow);
 
@@ -91,6 +103,7 @@ public:
         lineEditNimi->setPlaceholderText(QCoreApplication::translate("StartWindow", "Sisesta oma nimi siia...", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("StartWindow", "Alusta m\303\244ngu", nullptr));
         pushButtonEdetabel->setText(QCoreApplication::translate("StartWindow", "Vaata edetabelit", nullptr));
+        menuTypeRacer_Start->setTitle(QCoreApplication::translate("StartWindow", "TypeRacer", nullptr));
     } // retranslateUi
 
 };
