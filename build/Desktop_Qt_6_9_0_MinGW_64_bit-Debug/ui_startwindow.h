@@ -72,7 +72,7 @@ public:
         StartWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(StartWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 562, 25));
+        menubar->setGeometry(QRect(0, 0, 562, 22));
         StartWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(StartWindow);
         statusbar->setObjectName("statusbar");
@@ -87,7 +87,8 @@ public:
     {
         StartWindow->setWindowTitle(QCoreApplication::translate("StartWindow", "MainWindow", nullptr));
         labelTere->setText(QCoreApplication::translate("StartWindow", "Tere tulemast TypeRacerisse!", nullptr));
-        lineEditNimi->setText(QCoreApplication::translate("StartWindow", "Sisestage nimi", nullptr));
+        lineEditNimi->setText(QString());
+        lineEditNimi->setPlaceholderText(QCoreApplication::translate("StartWindow", "Sisesta oma nimi siia...", nullptr));
         pushButtonStart->setText(QCoreApplication::translate("StartWindow", "Alusta m\303\244ngu", nullptr));
         pushButtonEdetabel->setText(QCoreApplication::translate("StartWindow", "Vaata edetabelit", nullptr));
     } // retranslateUi

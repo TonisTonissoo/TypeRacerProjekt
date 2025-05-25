@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "startwindow.h"
 
 #include "functions.hpp"
 #include <chrono>
@@ -80,6 +81,9 @@ void MainWindow::lopetaMang() {
     vastus = QMessageBox::question(this, "Kinnitus", "Kas soovid mängu lõpetada?",
                                    QMessageBox::Yes|QMessageBox::No);
     if (vastus == QMessageBox::Yes) {
-        close();
+        this->close();
+
+        StartWindow *start = new StartWindow();
+        start->show();
     }
 }
