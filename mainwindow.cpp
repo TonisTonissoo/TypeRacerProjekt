@@ -5,10 +5,12 @@
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
+#include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(const QString& kasutajaNimi, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , kasutaja(kasutajaNimi)
 {
     ui->setupUi(this);
 
@@ -20,8 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
     } else {
         connect(ui->lineEditSisestus, &QLineEdit::returnPressed, this, &MainWindow::kontrolliSisestus);
         connect(ui->pushButtonUusLause, &QPushButton::clicked, this, &MainWindow::uusLause);
+        connect(ui->pushButtonLopeta, &QPushButton::clicked, this, &MainWindow::lopetaMang);
+
         uusLause();
     }
+
+    setWindowTitle("Tere, " + kasutaja + "!");
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +40,7 @@ void MainWindow::uusLause() {
     ui->labelLaused->setText(QString::fromStdString(lause));
     ui->lineEditSisestus->clear();
     ui->labelTulemus->clear();
+    ui->lineEditSisestus->setEnabled(true);  // Luba uuesti sisestamine
     start = std::chrono::high_resolution_clock::now();
 }
 
@@ -55,5 +62,14 @@ void MainWindow::kontrolliSisestus() {
                           .arg(QString::fromStdString(analüüs));
 
     ui->labelTulemus->setText(tulemus);
-    // Ei kutsu automaatselt uusLause() – kasutaja vajutab nuppu
+    ui->lineEditSisestus->setEnabled(false);  // Keela sisestus pärast vastust
+}
+
+void MainWindow::lopetaMang() {
+    QMessageBox::StandardButton vastus;
+    vastus = QMessageBox::question(this, "Kinnitus", "Kas soovid mängu lõpetada?",
+                                   QMessageBox::Yes|QMessageBox::No);
+    if (vastus == QMessageBox::Yes) {
+        close();
+    }
 }

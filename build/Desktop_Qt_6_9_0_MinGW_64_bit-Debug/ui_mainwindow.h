@@ -31,6 +31,7 @@ public:
     QLabel *labelLaused;
     QLineEdit *lineEditSisestus;
     QPushButton *pushButtonUusLause;
+    QPushButton *pushButtonLopeta;
     QLabel *labelTulemus;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -69,6 +70,13 @@ public:
 
         verticalLayout_3->addWidget(pushButtonUusLause);
 
+        pushButtonLopeta = new QPushButton(verticalLayoutWidget);
+        pushButtonLopeta->setObjectName("pushButtonLopeta");
+        sizePolicy.setHeightForWidth(pushButtonLopeta->sizePolicy().hasHeightForWidth());
+        pushButtonLopeta->setSizePolicy(sizePolicy);
+
+        verticalLayout_3->addWidget(pushButtonLopeta);
+
         labelTulemus = new QLabel(verticalLayoutWidget);
         labelTulemus->setObjectName("labelTulemus");
         labelTulemus->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
@@ -79,7 +87,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 562, 25));
+        menubar->setGeometry(QRect(0, 0, 562, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -94,7 +102,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         labelLaused->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        pushButtonUusLause->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        pushButtonUusLause->setText(QCoreApplication::translate("MainWindow", "M\303\244ngi uuesti", nullptr));
+        pushButtonLopeta->setText(QCoreApplication::translate("MainWindow", "L\303\265peta m\303\244ng", nullptr));
         labelTulemus->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     } // retranslateUi
 

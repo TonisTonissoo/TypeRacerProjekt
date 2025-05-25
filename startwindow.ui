@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+<class>StartWindow</class>
+<widget class="QMainWindow" name="StartWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -40,51 +40,30 @@
       <number>15</number>
      </property>
      <item>
-      <widget class="QLabel" name="labelLaused">
+      <widget class="QLabel" name="labelTere">
        <property name="text">
-        <string>TextLabel</string>
+        <string>Tere tulemast TypeRacerisse!</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditSisestus"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonUusLause">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QLineEdit" name="lineEditNimi">
        <property name="text">
-        <string>Mängi uuesti</string>
+        <string>Sisestage nimi</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButtonLopeta">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QPushButton" name="pushButtonStart">
        <property name="text">
-        <string>Lõpeta mäng</string>
+        <string>Alusta mängu</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelTulemus">
+      <widget class="QPushButton" name="pushButtonEdetabel">
        <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
+        <string>Vaata edetabelit</string>
        </property>
       </widget>
      </item>
@@ -97,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>562</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
